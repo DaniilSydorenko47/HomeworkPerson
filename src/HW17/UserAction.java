@@ -60,7 +60,7 @@ class TriangleSquare extends UserAction{
     public TriangleSquare(Scanner scanner){
         this.scanner=scanner;
     }
-
+    @Override
     protected void doAction() {
 
         System.out.println("Введіть довжину висоти");
