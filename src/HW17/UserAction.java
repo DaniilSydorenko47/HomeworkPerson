@@ -66,7 +66,7 @@ class TriangleSquare extends UserAction{
         System.out.println("Введіть довжину висоти");
         double height = scanner.nextDouble();
         System.out.println("Введіть довжину сторони, до якої проведена висота");
-        double side = scanner.nextInt();
+        double side = scanner.nextDouble();
         double square = (height * side)/2;
         System.out.println("Площа трикутника дорівнює  = " + square);
     }
