@@ -6,7 +6,8 @@ public class Main {
         UserAction[] userActions = new UserAction[]{
                 new CircleSquare(scanner),
                 new RectangleSquare(scanner),
-                new TriangleSquare(scanner)
+                new TriangleSquare(scanner),
+                new UsersChoice(scanner)
         };
         while (true) {
             for (int i = 0; i < userActions.length; i++) {
@@ -14,8 +15,9 @@ public class Main {
             }
             System.out.println("Виберіть пункт меню");
             int choice = scanner.nextInt() - 1;
-
-
+            if (choice+1 == 4) {
+                break;
+            }
             if (choice >= 0 && choice < userActions.length) {
                 userActions[choice].doAction();
             } else{

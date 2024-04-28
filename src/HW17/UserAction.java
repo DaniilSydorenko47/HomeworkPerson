@@ -75,3 +75,22 @@ class TriangleSquare extends UserAction{
         return "Порахувати площу трикутника";
     }
 }
+class UsersChoice extends UserAction {
+
+    private final Scanner scanner;
+
+    public UsersChoice(Scanner scanner){
+        this.scanner = scanner;
+    }
+
+    @Override
+    protected void doAction() {
+
+        }
+
+
+    @Override
+    protected String getName() {
+        return "Завершити програму";
+    }
+}
