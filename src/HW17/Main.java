@@ -7,15 +7,17 @@ public class Main {
                 new CircleSquare(scanner),
                 new RectangleSquare(scanner),
                 new TriangleSquare(scanner),
-                new UsersChoice(scanner)
         };
         while (true) {
-            for (int i = 0; i < userActions.length; i++) {
+            int i;
+            for (i = 0; i < userActions.length; i++) {
                 System.out.println(i + 1 + " " + userActions[i].getName());
+
             }
+            System.out.println(i+1 + " Завершити програму");
             System.out.println("Виберіть пункт меню");
             int choice = scanner.nextInt() - 1;
-            if (choice+1 == 4) {
+            if (choice+1 == userActions.length + 1) {
                 break;
             }
             if (choice >= 0 && choice < userActions.length) {
