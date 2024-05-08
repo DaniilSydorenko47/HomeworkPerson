@@ -1,6 +1,6 @@
 package HW20;
 
-import java.util.Arrays;
+import java.util.*;
 
 public class StringMain {
     public static void main(String[] args) {
@@ -8,7 +8,7 @@ public class StringMain {
         System.out.println(reverse(someString));
         System.out.println(vowels(someString));
         System.out.println(palindrome(someString));
-        System.out.println();
+        System.out.println(duplicates(someString));
         System.out.println(stringArray(someString));
 
     }
@@ -20,26 +20,33 @@ public class StringMain {
     }
     public static int vowels(String someString){
         String[] array = new String[]{"a", "e", "i", "o", "u"};
-        int arrayCounter = 0;
+        int vowelsCounter = 0;
         for (int i = 0; i < array.length; i++) {
             if(someString.contains(array[i])){
-                arrayCounter++;
+                vowelsCounter++;
             }
         }
-        return arrayCounter;
+        return vowelsCounter;
     }
-    public static boolean palindrome(String someString){
-        //String result = someString.toLowerCase();
+    public static String palindrome(String someString){
         StringBuilder stringBuilder = new StringBuilder(someString);
         String result = stringBuilder.reverse().toString();
         if(someString.equals(result)){
-            return true;
+            return "Так, "+ someString + " є паліндромом";
         } else{
-           return false;
+           return "Ні, "+ someString + " не є паліндромом";
         }
     }
-    public static void duplicates(String someString){
-
+    public static String duplicates(String someString){
+        Set<Character> uniqueChars = new HashSet<>();
+        StringBuilder newStr = new StringBuilder();
+        for (char c : someString.toCharArray()) {
+            if (!uniqueChars.contains(c)) {
+                uniqueChars.add(c);
+                newStr.append(c);
+            }
+        }
+        return newStr.toString();
     }
     public static String stringArray(String someString){
         String[] array = someString.split(" ");
