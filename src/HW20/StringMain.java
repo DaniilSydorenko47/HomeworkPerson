@@ -38,15 +38,16 @@ public class StringMain {
         }
     }
     public static String duplicates(String someString){
-        Set<Character> uniqueChars = new HashSet<>();
-        StringBuilder newStr = new StringBuilder();
-        for (char c : someString.toCharArray()) {
-            if (!uniqueChars.contains(c)) {
-                uniqueChars.add(c);
-                newStr.append(c);
+        StringBuilder newString = new StringBuilder();
+        int n = someString.length();
+
+        for (int i = 0; i < n; i++) {
+            if (newString.indexOf(String.valueOf(someString.charAt(i))) == -1) {
+                newString.append(someString.charAt(i));
             }
         }
-        return newStr.toString();
+
+        return newString.toString();
     }
     public static String stringArray(String someString){
         String[] array = someString.split(" ");
