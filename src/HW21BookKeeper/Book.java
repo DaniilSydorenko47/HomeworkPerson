@@ -12,7 +12,7 @@ public class Book {
         this.author = author;
         this.year = year;
     }
-
+ public Book(){};
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -26,6 +26,14 @@ public class Book {
         return Objects.hash(title, author, year);
     }
 
+    @Override
+    public String toString() {
+        return "Book{" +
+                "title='" + title + '\'' +
+                ", author='" + author + '\'' +
+                ", year=" + year +
+                '}';
+    }
 
     public String getTitle() {
         return title;
