@@ -2,35 +2,58 @@ package HW21BookKeeper;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
+
 
 public class BooksMemory {
-    private ArrayList<Book> books;// = new ArrayList<Book>();
+    private ArrayList<Book> books;
+    private ArrayList<Book> smallBooks;// = new ArrayList<Book>();
 
-    public BooksMemory(ArrayList<Book> books) {
+    public BooksMemory(ArrayList<Book> books, ArrayList<Book> smallBooks) {
         this.books = books;
+        this.smallBooks = smallBooks;
     }
 
     public void addBook(String title, String author, int year)throws DuplicateBookException, InvalidYearException {
-
-        for (Book book : books) {
-            if (book.equals(new Book(title, author, year))) {
-                throw new DuplicateBookException("Книга з такою назвою, автором та роком публікації вже існує");
+        try {
+            for (Book book : books) {
+                if (book.equals(new Book(title, author, year))) {
+                    throw new DuplicateBookException("Книга з такою назвою, автором та роком публікації вже існує");
+                }
+                if (year < 0 || year > 2024) {
+                    throw new InvalidYearException("Книга не може мати рік публікації менше за 0 або більше за теперішній рік");
+                }
             }
-            if (year<0 || year >2024){
-                throw new InvalidYearException("Книга не може мати рік публікації менше за 0 або більше за теперішній рік");
-            }
+            books.add(new Book(title, author, year));
+            smallBooks.add(new Book(title,author));
+        } catch (DuplicateBookException e){
+            System.out.println(e.getMessage());
+        } catch(InvalidYearException e){
+            System.out.println(e.getMessage());
+        } catch (Exception e){
+            System.out.println("Exception");
         }
-        books.add(new Book(title,author,year));
     }
 
-    public void removeBook(String author, String title) throws BookNotFoundException{
-        for (Book book: books){
-            if (book.getAuthor().equals(author) && book.getTitle().equals(title)){
-                books.remove(book);
-            } else {
-                throw new BookNotFoundException("Книга з таким автором та назвою не знайдена");
+    public void removeBook(String title, String author) throws BookNotFoundException {
+        try {
+            int year = 0;
+            for (Book book: books) {
+                if (book.getTitle().equals(title) && book.getAuthor().equals(author)) {
+                    year = book.getYear();
+                }
+                //Book book1 = new Book(title, author, year);
+                if (book.getTitle().equals(title) && book.getAuthor().equals(author) && book.getYear() == year) {
+                    books.remove(book);
+                } else {
+                    throw new BookNotFoundException("Книга з таким автором та назвою не знайдена");
+                }
             }
+        }
+
+        catch (BookNotFoundException e){
+            System.out.println(e.getMessage());
+        } catch (Exception e){
+            System.out.println("Exception");
         }
     }
 
