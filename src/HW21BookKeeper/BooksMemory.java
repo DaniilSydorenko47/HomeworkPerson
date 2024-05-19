@@ -1,16 +1,11 @@
 package HW21BookKeeper;
-
-import java.io.IOException;
 import java.util.ArrayList;
-
 
 public class BooksMemory {
     private ArrayList<Book> books;
-    private ArrayList<Book> smallBooks;// = new ArrayList<Book>();
 
-    public BooksMemory(ArrayList<Book> books, ArrayList<Book> smallBooks) {
+    public BooksMemory(ArrayList<Book> books) {
         this.books = books;
-        this.smallBooks = smallBooks;
     }
 
     public void addBook(String title, String author, int year)throws DuplicateBookException, InvalidYearException {
@@ -24,7 +19,6 @@ public class BooksMemory {
                 }
             }
             books.add(new Book(title, author, year));
-            smallBooks.add(new Book(title,author));
         } catch (DuplicateBookException e){
             System.out.println(e.getMessage());
         } catch(InvalidYearException e){
@@ -36,21 +30,19 @@ public class BooksMemory {
 
     public void removeBook(String title, String author) throws BookNotFoundException {
         try {
-            int year = 0;
-            for (Book book: books) {
-                if (book.getTitle().equals(title) && book.getAuthor().equals(author)) {
-                    year = book.getYear();
-                }
-                //Book book1 = new Book(title, author, year);
-                if (book.getTitle().equals(title) && book.getAuthor().equals(author) && book.getYear() == year) {
+            Book book = new Book(title,author);
+            books.add(book);
+            for (Book book1: books){
+                if (book1.getBook().equals(book)){
+                    books.remove(book1);
                     books.remove(book);
-                } else {
-                    throw new BookNotFoundException("Книга з таким автором та назвою не знайдена");
                 }
             }
-        }
+            if (books.contains(book)){
+                throw new BookNotFoundException("Книга з таким автором та назвою не знайдена");
+            }
 
-        catch (BookNotFoundException e){
+        } catch (BookNotFoundException e){
             System.out.println(e.getMessage());
         } catch (Exception e){
             System.out.println("Exception");
@@ -68,8 +60,8 @@ public class BooksMemory {
     }
     public ArrayList<Book> indBooksByYear(int year){
         ArrayList<Book> booksByYear = new ArrayList<>();
-        for(Book book: books){
-            if (book.getYear()== year){
+        for (Book book: books) {
+            if (book.getYear() == year){
                 booksByYear.add(book);
             }
         }

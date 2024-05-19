@@ -6,18 +6,19 @@ public class Book {
     private String title;
     private String author;
     private int year;
-
+    private Book book;
 
     public Book(String title, String author, int year) {
         this.title = title;
         this.author = author;
         this.year = year;
+        this.book = new Book(title,author);
     }
     public Book(String title, String author) {
         this.title = title;
         this.author = author;
     }
- public Book(){};
+    public Book(){}
 
     @Override
     public boolean equals(Object o) {
@@ -53,4 +54,7 @@ public class Book {
         return year;
     }
 
+    public Book getBook() {
+        return book;
+    }
 }
