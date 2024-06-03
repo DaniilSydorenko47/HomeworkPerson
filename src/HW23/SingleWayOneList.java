@@ -13,14 +13,14 @@ public class SingleWayOneList<T> implements Iterable<T> {
 
     private static class Node<T>{
 
-        private Node<T> next;
-        private T data;
         private Node<T> prev;
+        private T data;
+        private Node<T> next;
 
-        public Node(Node<T> next, T data, Node<T> prev) {
+        public Node(T data) {
             this.data = data;
-            this.next = next;
-            this.prev = prev;
+            this.next = null;
+            this.prev = null;
         }
 
         @Override
@@ -30,15 +30,15 @@ public class SingleWayOneList<T> implements Iterable<T> {
     }
 
     public void add(T data) {
-        Node<T> first = head;
-        Node<T> newNode = new Node<>(null, data, first);
-        head = newNode;
-        if (first == null)
+        Node newNode = new Node(data);
+        if (head == null) {
+            head = newNode;
             tail = newNode;
-        else
-            first.prev = newNode;
-        size++;
-
+        } else {
+            newNode.next = head;
+            head.prev = newNode;
+            head = newNode;
+        }
     }
     public void removeLast(){
         if (head == null){
@@ -63,7 +63,6 @@ public class SingleWayOneList<T> implements Iterable<T> {
     private class MyIterator implements Iterator<T> {
 
         private Node<T> current = head;
-        //private Node<T> current = tail;
 
         @Override
         public boolean hasNext() {
